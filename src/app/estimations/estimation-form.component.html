@@ -1,65 +1,59 @@
 <div class="form-group container-fluid text-center w-50 p-3">
   <form (ngSubmit)="onSubmit()" #loanForm="ngForm">
-      <h2>Loan Estimations Calculator</h2>
+    <h2>{{title}}</h2>
 
-      <div class="row p-3">
-        <div class="col-xs-3">
-          <label for="loanValue">Loan Value: </label>
-        </div>
-        <div class="col-xs-9">
-          <input type="number" class="form-control" id="loanValue"
-                 required
-                 min="0"
-                 [(ngModel)]="model.loanValue" name="loanValue"/>
-        </div>
+    <div class="row p-3">
+      <div class="col-xs-3">
+        <label for="loanValue">Loan Value: </label>
       </div>
-      <div class="row p-3">
-        <div class="col-xs-3">
-          <label for="yearlyInterestRate">Interest Rate (in years): </label>
-        </div>
-        <div class="col-xs-9">
-          <input type="number" class="form-control" id="yearlyInterestRate"
-                 required
-                 min="0"
-                 max="100"
-                 [(ngModel)]="model.yearlyInterestRate" name="yearlyInterestRate"/>
-        </div>
+      <div class="col-xs-9">
+        <input type="number" class="form-control" id="loanValue"
+               required
+               min="0"
+               [(ngModel)]="model.loanValue" name="loanValue"/>
       </div>
-      <div class="row p-3">
-        <div class="col-xs-3">
-          <label for="termInYears">Loan Term (in years): </label>
-        </div>
-        <div class="col-xs-9">
-          <input type="number" class="form-control" id="termInYears"
-                 required
-                 min="0"
-                 max="30"
-                 [(ngModel)]="model.loanTermInYears" name="termInYears"/>
-        </div>
+    </div>
+    <div class="row p-3">
+      <div class="col-xs-3">
+        <label for="yearlyInterestRate">Interest Rate (in years): </label>
       </div>
+      <div class="col-xs-9">
+        <input type="number" class="form-control" id="yearlyInterestRate"
+               required
+               min="0"
+               max="100"
+               [(ngModel)]="model.yearlyInterestRate" name="yearlyInterestRate"/>
+      </div>
+    </div>
+    <div class="row p-3">
+      <div class="col-xs-3">
+        <label for="termInYears">Loan Term (in years): </label>
+      </div>
+      <div class="col-xs-9">
+        <input type="number" class="form-control" id="termInYears"
+               required
+               min="0"
+               max="30"
+               [(ngModel)]="model.loanTermInYears" name="termInYears"/>
+      </div>
+    </div>
 
-      <div class="row p-3">
-        <div class="col-xs-3">
-          <button type="submit" class="btn btn-success" [disabled]="!loanForm.form.valid">Calculate</button>
-        </div>
+    <div class="row p-3">
+      <div class="col-xs-3">
+        <button type="submit" class="btn btn-success" [disabled]="!loanForm.form.valid">Calculate</button>
       </div>
+    </div>
   </form>
 
   <div *ngIf="result >= 0">
     <div class="row p-3">
       <div class="col-xs-7">
-        <h4>Estimated loan</h4>
+        <h4>Estimated EMI</h4>
         <p>{{result}}</p>
       </div>
     </div>
   </div>
 
-  <div *ngIf="error.length > 0">
-    <div class="row p-3">
-      <div class="col-xs-7">
-        <p>{{error}}</p>
-      </div>
-    </div>
-  </div>
+  <error-message message="{{error}}"></error-message>
 
 </div>

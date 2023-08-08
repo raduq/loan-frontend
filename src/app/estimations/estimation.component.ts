@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {Estimation} from "./estimation";
 import {ApiService} from "../api/ApiService";
 
@@ -9,25 +9,32 @@ import {ApiService} from "../api/ApiService";
 })
 export class EstimationFormComponent {
 
+  @Input() title: String = ""
+
   constructor(private apiService: ApiService) {
   }
 
-  model = new Estimation(0, 0, 0);
+  model: Estimation = new Estimation(0, 0, 0);
 
   result: number = -1
   error: string = ""
-  submitted = false;
+  submitted: boolean = false
 
   onSubmitObserver = {
     next: (result: number) => this.result = result,
     error: (err: Error) => this.error = err.message
   };
 
-  onSubmit() {
-    this.error = ""
-    this.submitted = true;
+  onSubmit(): void {
+    this.reset()
+    this.submitted = true
 
     this.apiService.requestEMI(this.model).subscribe(this.onSubmitObserver)
+  }
+
+  private reset(): void {
+    this.error = ""
+    this.result = -1
   }
 
 }
