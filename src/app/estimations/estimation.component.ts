@@ -1,40 +1,43 @@
 import {Component, Input} from '@angular/core';
 import {Estimation} from "./estimation";
 import {ApiService} from "../api/ApiService";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
-  selector: 'estimation-form',
-  templateUrl: './estimation-form.component.html',
-  styleUrls: ['./estimation-form.component.css']
+    selector: 'estimation-form',
+    templateUrl: './estimation-form.component.html',
+    styleUrls: ['./estimation-form.component.css']
 })
 export class EstimationFormComponent {
 
-  @Input() title: String = ""
+    @Input() title: String = ""
 
-  constructor(private apiService: ApiService) {
-  }
+    constructor(private apiService: ApiService) {
+    }
 
-  model: Estimation = new Estimation(0, 0, 0);
+    model: Estimation = new Estimation(0, 0, 0);
 
-  result: number = -1
-  error: string = ""
-  submitted: boolean = false
+    result: number = -1
+    error: string = ""
+    submitted: boolean = false
 
-  onSubmitObserver = {
-    next: (result: number) => this.result = result,
-    error: (err: Error) => this.error = err.message
-  };
+    onSubmitObserver = {
+        next: (result: number) => this.result = result,
+        error: (err: Error) => this.error = err.message
+    };
 
-  onSubmit(): void {
-    this.reset()
-    this.submitted = true
+    onSubmit(): void {
+        this.reset()
+        this.submitted = true
+        this.apiService.requestEMI(this.model).subscribe(this.onSubmitObserver)
+    }
 
-    this.apiService.requestEMI(this.model).subscribe(this.onSubmitObserver)
-  }
-
-  private reset(): void {
-    this.error = ""
-    this.result = -1
-  }
-
+    private reset()
+        :
+        void {
+        this
+            .error = ""
+        this
+            .result = -1
+    }
 }
