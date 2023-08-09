@@ -1,7 +1,7 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {catchError, Observable} from 'rxjs';
-import {Estimation} from "../estimations/estimation";
+import {Estimation} from "../components/estimations/estimation";
 
 @Injectable({providedIn: 'root'})
 export class ApiService {

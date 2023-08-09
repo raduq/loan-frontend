@@ -1,14 +1,14 @@
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
-import {ErrorMessageComponent} from "./error/error-message.component";
-import {EstimationFormComponent} from "./estimations/estimation.component";
+import {ErrorMessageComponent} from "./components/error/error-message.component";
+import {EstimationComponent} from "./components/estimations/estimation.component";
 import {BrowserModule} from "@angular/platform-browser";
 import {FormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 
 describe('AppComponent', () => {
   beforeEach(() => TestBed.configureTestingModule({
-    declarations: [AppComponent, ErrorMessageComponent, EstimationFormComponent],
+    declarations: [AppComponent, ErrorMessageComponent, EstimationComponent],
     imports: [
       BrowserModule,
       FormsModule,
